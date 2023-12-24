@@ -1,0 +1,17 @@
+import { range, shuffle } from "lodash-es";
+
+export default function generateGrid() {
+  const grid = document.querySelector("#grid") as HTMLCanvasElement;
+  const gridItemNumbers = shuffle([...range(8), ...range(8)]);
+
+  gridItemNumbers.forEach((item) => {
+    grid.insertAdjacentHTML("beforeend", `<div>Grid! ${item}</div>`);
+  });
+
+  const gridItems = document.querySelectorAll("#grid > div");
+  gridItems.forEach((item, index) => {
+    setTimeout(() => {
+      item.classList.add("grid-item");
+    }, index * 100);
+  });
+}

@@ -1,4 +1,5 @@
 import { calculateGridSize } from "./calculateGridSize";
+import generateGrid from "./generateGrid";
 
 export default function startGame() {
   const startBtn = document.querySelector("#btn-start") as HTMLCanvasElement;
@@ -23,22 +24,7 @@ export default function startGame() {
 
       calculateGridSize();
 
-      grid.insertAdjacentHTML(
-        "beforeend",
-        `<div>Grid!</div><div>Grid!</div><div>Grid!</div><div>Grid!</div>
-      <div>Grid!</div><div>Grid!</div><div>Grid!</div><div>Grid!</div>
-      <div>Grid!</div><div>Grid!</div><div>Grid!</div><div>Grid!</div>
-      <div>Grid!</div><div>Grid!</div><div>Grid!</div><div>Grid!</div>`
-      );
-
-      const gridItems = document.querySelectorAll("#grid > div");
-
-      // add class to each grid item with a delay
-      gridItems.forEach((item, index) => {
-        setTimeout(() => {
-          item.classList.add("grid-item");
-        }, index * 100);
-      });
+      generateGrid();
 
       game.insertAdjacentHTML("beforeend", "<p>Score:</p>");
       window.addEventListener("resize", calculateGridSize);
