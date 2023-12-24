@@ -1,7 +1,8 @@
 import { range, shuffle } from "lodash-es";
+import handleItemClick from "./handleItemClick";
 
 export default function generateGrid() {
-  const grid = document.querySelector("#grid") as HTMLCanvasElement;
+  const grid = document.querySelector("#grid") as HTMLElement;
   const gridItemNumbers = shuffle([...range(8), ...range(8)]);
 
   gridItemNumbers.forEach((item) => {
@@ -12,6 +13,7 @@ export default function generateGrid() {
   gridItems.forEach((item, index) => {
     setTimeout(() => {
       item.classList.add("grid-item");
-    }, index * 100);
+      item.addEventListener("click", handleItemClick);
+    }, index * 50);
   });
 }
