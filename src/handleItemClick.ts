@@ -7,36 +7,47 @@ export default function handleItemClick(e: Event) {
   // console.log("Item Clicked!");
 
   if (target.classList.contains("flipped")) {
-    // console.log("Already flipped!");
+    console.log("Already flipped!");
     return;
   }
 
-  if (itemValues.firstItemValue === null) {
-    itemValues.firstItemValue = target.textContent;
-    target.classList.add("flipped");
-    // console.log("firstItemValue = " + itemValues.firstItemValue);
-    // console.log("target.textContent = " + target.textContent);
-  } else if (itemValues.secondItemValue === null) {
-    itemValues.secondItemValue = target.textContent;
-    target.classList.add("flipped");
-    // console.log("secondItemValue = " + itemValues.secondItemValue);
-    // console.log("second target.textContent = " + target.textContent);
+  const clickItem = () => {
+    if (itemValues.firstItemValue === null) {
+      itemValues.firstItemValue = target.textContent;
+      target.classList.add("flipped");
+      // console.log("firstItemValue = " + itemValues.firstItemValue);
+      // console.log("target.textContent = " + target.textContent);
+    } else if (itemValues.secondItemValue === null) {
+      itemValues.secondItemValue = target.textContent;
+      target.classList.add("flipped");
+      // console.log("secondItemValue = " + itemValues.secondItemValue);
+      // console.log("second target.textContent = " + target.textContent);
+      checkForMatch();
+    } else if (
+      itemValues.firstItemValue !== null &&
+      itemValues.secondItemValue !== null
+    ) {
+      console.log("resetting cards");
+      resetCards();
+      resetValues();
+      clickItem();
+    }
+  };
 
-    checkForMatch();
-  }
+  clickItem();
 
   // console.log(itemValues);
 
-  if (
-    itemValues.firstItemValue === null &&
-    itemValues.secondItemValue === null
-  ) {
-    // console.log("resetting cards");
-    setTimeout(() => {
-      resetCards();
-      resetValues();
-    }, 1000);
-  }
+  // if (
+  //   itemValues.firstItemValue === null &&
+  //   itemValues.secondItemValue === null
+  // ) {
+  //   // console.log("resetting cards");
+  //   setTimeout(() => {
+  //     resetCards();
+  //     resetValues();
+  //   }, 1000);
+  // }
 
   if (checkForWin()) {
     game.insertAdjacentHTML(
@@ -74,10 +85,8 @@ const checkForMatch = () => {
     flippedCards.forEach((card) => {
       card.classList.add("matched");
     });
-    resetValues();
   } else {
     console.log("No Match!");
-    resetValues();
   }
 };
 
