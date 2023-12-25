@@ -1,7 +1,7 @@
+import itemValues from "./itemValues";
+
 export default function handleItemClick(e: Event) {
-  const target = e.target as HTMLElement;
-  let firstItemValue: string | null = null;
-  let secondItemValue: string | null = null;
+  const target = e.currentTarget as HTMLElement;
   console.log("Item Clicked!");
 
   if (target.classList.contains("flipped")) {
@@ -9,37 +9,58 @@ export default function handleItemClick(e: Event) {
     return;
   }
 
-  if (firstItemValue === null) {
-    firstItemValue = target.textContent;
+  if (itemValues.firstItemValue === null) {
+    itemValues.firstItemValue = target.textContent;
     target.classList.add("flipped");
-    console.log("firstItemValue = " + firstItemValue);
-    console.log("target.textContent = " + target.textContent);
-  } else if (secondItemValue === null) {
-    secondItemValue = target.textContent;
+    // console.log("firstItemValue = " + itemValues.firstItemValue);
+    // console.log("target.textContent = " + target.textContent);
+  } else if (itemValues.secondItemValue === null) {
+    itemValues.secondItemValue = target.textContent;
     target.classList.add("flipped");
-    console.log("secondItemValue = " + secondItemValue);
-    console.log("second target.textContent = " + target.textContent);
+    // console.log("secondItemValue = " + itemValues.secondItemValue);
+    // console.log("second target.textContent = " + target.textContent);
+
+    checkForMatch();
   }
 
-  if (firstItemValue === null && secondItemValue === null) {
-    document.addEventListener("click", () => {
-      const gridItems = document.querySelectorAll("#grid > div");
-      gridItems.forEach((item) => {
-        item.classList.remove("flipped");
-      });
-    });
-    return;
-  }
+  console.log(itemValues);
 
-  if (firstItemValue === secondItemValue) {
-    console.log("Match!");
-    firstItemValue = null;
-    secondItemValue = null;
-  } else {
-    console.log("No Match!");
-    firstItemValue = null;
-    secondItemValue = null;
+  if (
+    itemValues.firstItemValue === null &&
+    itemValues.secondItemValue === null
+  ) {
+    console.log("resetting cards");
+    setTimeout(() => {
+      resetCards();
+      resetValues();
+    }, 1000);
   }
 
   // console.log("firstItemValue = " + firstItemValue);
 }
+
+const resetCards = () => {
+  const gridItems = document.querySelectorAll("#grid > div");
+  gridItems.forEach((item) => {
+    item.classList.remove("flipped");
+  });
+};
+
+const resetValues = () => {
+  itemValues.firstItemValue = null;
+  itemValues.secondItemValue = null;
+};
+
+const checkForMatch = () => {
+  const flippedCards = document.querySelectorAll(".flipped");
+  if (itemValues.firstItemValue === itemValues.secondItemValue) {
+    console.log("Match!");
+    flippedCards.forEach((card) => {
+      card.classList.add("matched");
+    });
+    resetValues();
+  } else {
+    console.log("No Match!");
+    resetValues();
+  }
+};

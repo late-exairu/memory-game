@@ -91,36 +91,72 @@ h1 {
     visibility: hidden;
   }
 
-  div {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    padding: 2em;
-    min-width: 0;
-    min-height: 0;
-    border-radius: 8px;
-    background-color: #eeeeee;
-    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+  .grid-item {
+    position: relative;
     transition: all 300ms;
     cursor: pointer;
     will-change: transform, box-shadow;
-    opacity: 0;
-    transform: scale(0.5);
+    opacity: 1;
+    border-radius: 8px;
+    transform: scale(1) rotateY(0);
+    transform-style: preserve-3d;
+    font-size: 5em;
 
     &:hover {
       transform: scale(1.05);
       box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
     }
 
-    &.grid-item {
-      opacity: 1;
-      transform: scale(1);
+    &.hidden {
+      opacity: 0;
+      transform: scale(0.5);
     }
 
     &.flipped {
-      background-color: #646cff;
-      /* transform: rotateY(180deg); */
+      transform: rotateY(180deg);
+    }
+
+    &.matched {
+      pointer-events: none;
+      transform: scale(0.9) rotateY(180deg);
+      color: #888;
+
+      .back-face {
+        background-color: #eeeeee;
+        opacity: 0.5;
+        box-shadow: 0 0 3px rgba(0, 0, 0, 0.5);
+      }
+    }
+
+    .front-face {
+      position: absolute;
+      display: flex;
+      inset: 0;
+      align-items: center;
+      justify-content: center;
+      min-width: 0;
+      min-height: 0;
+      border-radius: 8px;
+      background-color: #eeeeee;
+      box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+      z-index: 1;
+      backface-visibility: hidden;
+    }
+
+    .back-face {
+      position: absolute;
+      display: flex;
+      inset: 0;
+      align-items: center;
+      justify-content: center;
+      min-width: 0;
+      min-height: 0;
+      border-radius: 8px;
+      background-color: #eeeeee;
+      box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+      z-index: 2;
+      backface-visibility: hidden;
+      transform: rotateY(180deg);
     }
 
     h2 {

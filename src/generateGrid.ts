@@ -6,13 +6,20 @@ export default function generateGrid() {
   const gridItemNumbers = shuffle([...range(8), ...range(8)]);
 
   gridItemNumbers.forEach((item) => {
-    grid.insertAdjacentHTML("beforeend", `<div>Grid! ${item}</div>`);
+    grid.insertAdjacentHTML(
+      "beforeend",
+      `<div class="grid-item hidden">
+        <div class="front-face"></div>
+        <div class="back-face">${item}</div>
+      </div>
+    `
+    );
   });
 
-  const gridItems = document.querySelectorAll("#grid > div");
+  const gridItems = document.querySelectorAll("#grid .grid-item");
   gridItems.forEach((item, index) => {
     setTimeout(() => {
-      item.classList.add("grid-item");
+      item.classList.remove("hidden");
       item.addEventListener("click", handleItemClick);
     }, index * 50);
   });
