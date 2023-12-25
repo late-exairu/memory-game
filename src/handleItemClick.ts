@@ -1,11 +1,13 @@
+import restartGame from "./restartGame";
 import itemValues from "./itemValues";
 
 export default function handleItemClick(e: Event) {
+  const game = document.querySelector("#game") as HTMLElement;
   const target = e.currentTarget as HTMLElement;
-  console.log("Item Clicked!");
+  // console.log("Item Clicked!");
 
   if (target.classList.contains("flipped")) {
-    console.log("Already flipped!");
+    // console.log("Already flipped!");
     return;
   }
 
@@ -23,17 +25,31 @@ export default function handleItemClick(e: Event) {
     checkForMatch();
   }
 
-  console.log(itemValues);
+  // console.log(itemValues);
 
   if (
     itemValues.firstItemValue === null &&
     itemValues.secondItemValue === null
   ) {
-    console.log("resetting cards");
+    // console.log("resetting cards");
     setTimeout(() => {
       resetCards();
       resetValues();
     }, 1000);
+  }
+
+  if (checkForWin()) {
+    game.insertAdjacentHTML(
+      "beforeend",
+      `<div>
+         <p>You Win!</p>
+         <button id="btn-restart">Restart Game</button>
+       </div>`
+    );
+
+    document
+      .querySelector("#btn-restart")!
+      .addEventListener("click", restartGame);
   }
 
   // console.log("firstItemValue = " + firstItemValue);
@@ -62,5 +78,13 @@ const checkForMatch = () => {
   } else {
     console.log("No Match!");
     resetValues();
+  }
+};
+
+const checkForWin = () => {
+  const matchedCards = document.querySelectorAll(".matched");
+  if (matchedCards.length === 16) {
+    console.log("You Win!");
+    return true;
   }
 };

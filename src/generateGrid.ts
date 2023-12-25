@@ -5,6 +5,8 @@ export default function generateGrid() {
   const grid = document.querySelector("#grid") as HTMLElement;
   const gridItemNumbers = shuffle([...range(8), ...range(8)]);
 
+  grid.innerHTML = "";
+
   gridItemNumbers.forEach((item) => {
     grid.insertAdjacentHTML(
       "beforeend",
