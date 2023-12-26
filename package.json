@@ -12,6 +12,7 @@
     "preview": "vite preview"
   },
   "devDependencies": {
+    "@types/lodash-es": "^4.17.12",
     "typescript": "^5.2.2",
     "vite": "^5.0.8"
   },

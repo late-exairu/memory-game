@@ -1,18 +1,17 @@
-import { range, shuffle } from "lodash-es";
 import handleItemClick from "./handleItemClick";
+import { gridItemNumbers } from "./itemValues";
+import images from "./images";
 
 export default function generateGrid() {
   const grid = document.querySelector("#grid") as HTMLElement;
-  const gridItemNumbers = shuffle([...range(8), ...range(8)]);
-
   grid.innerHTML = "";
 
-  gridItemNumbers.forEach((item) => {
+  gridItemNumbers.forEach((item, index) => {
     grid.insertAdjacentHTML(
       "beforeend",
-      `<div class="grid-item hidden">
+      `<div data-index=${index} class="grid-item hidden">
         <div class="front-face"></div>
-        <div class="back-face">${item}</div>
+        <div class="back-face">${images[item]}</div>
       </div>
     `
     );

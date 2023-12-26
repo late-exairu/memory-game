@@ -149,6 +149,7 @@ h1 {
       position: absolute;
       display: flex;
       inset: 0;
+      padding: 10px;
       align-items: center;
       justify-content: center;
       min-width: 0;

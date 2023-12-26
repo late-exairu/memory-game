@@ -1,10 +1,14 @@
 import restartGame from "./restartGame";
-import itemValues from "./itemValues";
+import { itemValues, gridItemNumbers } from "./itemValues";
+import { resetCards } from "./resetCards";
+import { resetValues } from "./resetValues";
+import { checkForMatch } from "./checkForMatch";
+import { checkForWin } from "./checkForWin";
 
 export default function handleItemClick(e: Event) {
   const game = document.querySelector("#game") as HTMLElement;
   const target = e.currentTarget as HTMLElement;
-  // console.log("Item Clicked!");
+  const itemIndex = target.dataset.index;
 
   if (target.classList.contains("flipped")) {
     console.log("Already flipped!");
@@ -13,15 +17,13 @@ export default function handleItemClick(e: Event) {
 
   const clickItem = () => {
     if (itemValues.firstItemValue === null) {
-      itemValues.firstItemValue = target.textContent;
+      itemValues.firstItemValue = gridItemNumbers[itemIndex];
       target.classList.add("flipped");
-      // console.log("firstItemValue = " + itemValues.firstItemValue);
-      // console.log("target.textContent = " + target.textContent);
+      console.log("firstItemValue = " + itemValues.firstItemValue);
     } else if (itemValues.secondItemValue === null) {
-      itemValues.secondItemValue = target.textContent;
+      itemValues.secondItemValue = gridItemNumbers[itemIndex];
       target.classList.add("flipped");
-      // console.log("secondItemValue = " + itemValues.secondItemValue);
-      // console.log("second target.textContent = " + target.textContent);
+      console.log("secondItemValue = " + itemValues.secondItemValue);
       checkForMatch();
     } else if (
       itemValues.firstItemValue !== null &&
@@ -36,19 +38,6 @@ export default function handleItemClick(e: Event) {
 
   clickItem();
 
-  // console.log(itemValues);
-
-  // if (
-  //   itemValues.firstItemValue === null &&
-  //   itemValues.secondItemValue === null
-  // ) {
-  //   // console.log("resetting cards");
-  //   setTimeout(() => {
-  //     resetCards();
-  //     resetValues();
-  //   }, 1000);
-  // }
-
   if (checkForWin()) {
     game.insertAdjacentHTML(
       "beforeend",
@@ -62,38 +51,4 @@ export default function handleItemClick(e: Event) {
       .querySelector("#btn-restart")!
       .addEventListener("click", restartGame);
   }
-
-  // console.log("firstItemValue = " + firstItemValue);
 }
-
-const resetCards = () => {
-  const gridItems = document.querySelectorAll("#grid > div");
-  gridItems.forEach((item) => {
-    item.classList.remove("flipped");
-  });
-};
-
-const resetValues = () => {
-  itemValues.firstItemValue = null;
-  itemValues.secondItemValue = null;
-};
-
-const checkForMatch = () => {
-  const flippedCards = document.querySelectorAll(".flipped");
-  if (itemValues.firstItemValue === itemValues.secondItemValue) {
-    console.log("Match!");
-    flippedCards.forEach((card) => {
-      card.classList.add("matched");
-    });
-  } else {
-    console.log("No Match!");
-  }
-};
-
-const checkForWin = () => {
-  const matchedCards = document.querySelectorAll(".matched");
-  if (matchedCards.length === 16) {
-    console.log("You Win!");
-    return true;
-  }
-};
