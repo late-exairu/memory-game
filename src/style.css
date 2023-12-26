@@ -160,6 +160,7 @@ h1 {
       z-index: 2;
       backface-visibility: hidden;
       transform: rotateY(180deg);
+      overflow: hidden;
     }
 
     h2 {
