@@ -8,7 +8,9 @@ import { checkForWin } from "./checkForWin";
 export default function handleItemClick(e: Event) {
   const game = document.querySelector("#game") as HTMLElement;
   const target = e.currentTarget as HTMLElement;
-  const itemIndex = target.dataset.index;
+  const itemIndex = target.dataset.index
+    ? Number.parseInt(target.dataset.index)
+    : 0;
 
   if (target.classList.contains("flipped")) {
     console.log("Already flipped!");
