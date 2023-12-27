@@ -16,14 +16,14 @@ const linkedin = `<svg stroke="currentColor" fill="currentColor" stroke-width="0
 
 const numbersSet = ["1", "2", "3", "4", "5", "6", "7", "8"];
 const colorsSet = [
-  "<div class='colored-bg' style='background: #003b5c'></div>",
-  "<div class='colored-bg' style='background: #0057e5'></div>",
-  "<div class='colored-bg' style='background: #41b6e6'></div>",
-  "<div class='colored-bg' style='background: #3ea908'></div>",
-  "<div class='colored-bg' style='background: #f0cc2e'></div>",
-  "<div class='colored-bg' style='background: #ec894d'></div>",
-  "<div class='colored-bg' style='background: #e50000'></div>",
-  "<div class='colored-bg' style='background: #e641b6'></div>",
+  "<div class='colored-bg' style='background: #F00314'></div>",
+  "<div class='colored-bg' style='background: #FF8019'></div>",
+  "<div class='colored-bg' style='background: #FAE603'></div>",
+  "<div class='colored-bg' style='background: #28E10A'></div>",
+  "<div class='colored-bg' style='background: #3BB5FF'></div>",
+  "<div class='colored-bg' style='background: #0500C7'></div>",
+  "<div class='colored-bg' style='background: #5C03FA'></div>",
+  "<div class='colored-bg' style='background: #DE00ED'></div>",
 ];
 const socialsSet = [
   facebook,
