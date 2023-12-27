@@ -1,19 +1,22 @@
 import handleItemClick from "./handleItemClick";
 import { gridItemNumbers } from "./itemValues";
-import images from "./images";
+import IconSet from "./iconSet";
 
 export default function generateGrid() {
   const grid = document.querySelector("#grid") as HTMLElement;
   grid.innerHTML = "";
+
+  const iconInstance = IconSet.getInstance();
+  const icons = iconInstance.getImages();
+  console.log(icons);
 
   gridItemNumbers.forEach((item, index) => {
     grid.insertAdjacentHTML(
       "beforeend",
       `<div data-index=${index} class="grid-item hidden">
         <div class="front-face"></div>
-        <div class="back-face">${images[item]}</div>
-      </div>
-    `
+        <div class="back-face">${icons[item]}</div>
+      </div>`
     );
   });
 

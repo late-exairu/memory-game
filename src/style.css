@@ -51,7 +51,6 @@ h1 {
 }
 
 #intro {
-  display: flex;
   flex-direction: column;
   align-items: center;
   opacity: 1;
@@ -65,6 +64,14 @@ h1 {
     opacity: 0;
     visibility: hidden;
   }
+}
+
+#select-difficulty {
+  font-family: inherit;
+  font-size: 1.1rem;
+  padding: 3px 10px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
 }
 
 #grid {
@@ -127,6 +134,12 @@ h1 {
         background-color: #eeeeee;
         opacity: 0.5;
         box-shadow: 0 0 3px rgba(0, 0, 0, 0.5);
+
+        .colored-bg {
+          position: absolute;
+          inset: 0;
+          opacity: 0.5;
+        }
       }
     }
 
@@ -161,6 +174,11 @@ h1 {
       backface-visibility: hidden;
       transform: rotateY(180deg);
       overflow: hidden;
+
+      .colored-bg {
+        position: absolute;
+        inset: 0;
+      }
     }
 
     h2 {
@@ -176,25 +194,21 @@ h1 {
   }
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.vanilla:hover {
-  filter: drop-shadow(0 0 2em #3178c6aa);
-}
+.description {
+  max-width: 480px;
+  margin: 20px auto;
+  text-wrap: pretty;
 
-.card {
-  padding: 2em;
-}
+  p {
+    margin: 0;
+    font-size: 1.1rem;
+    color: #888;
 
-.read-the-docs {
-  color: #888;
+    &.sm {
+      margin-top: 16px;
+      font-size: 0.8em;
+    }
+  }
 }
 
 button {
