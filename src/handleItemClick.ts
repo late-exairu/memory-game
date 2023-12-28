@@ -1,9 +1,19 @@
 import restartGame from "./restartGame";
 import { itemValues, gridItemNumbers } from "./itemValues";
-import { resetCards } from "./resetCards";
-import { resetValues } from "./resetValues";
 import { checkForMatch } from "./checkForMatch";
 import { checkForWin } from "./checkForWin";
+
+export const resetValues = () => {
+  itemValues.firstItemValue = null;
+  itemValues.secondItemValue = null;
+};
+
+export const resetCards = () => {
+  const gridItems = document.querySelectorAll("#grid > div");
+  gridItems.forEach((item) => {
+    item.classList.remove("flipped");
+  });
+};
 
 export default function handleItemClick(e: Event) {
   const game = document.querySelector("#game") as HTMLElement;
